@@ -58,7 +58,13 @@ export async function strict_output(
     res = res.replace(/(\w)"(\w)/g, "$1'$2");
 
     console.log(res);
+    const parsedObjects = [];
+    for (const line of res.split("\n")) {
+      if (!line.trim()) continue;
+      parsedObjects.push(JSON.parse(line));
+    }
+    console.log(parsedObjects);
 
-    return [JSON.parse(res)];
+    return parsedObjects;
   }
 }
